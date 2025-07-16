@@ -95,9 +95,9 @@ export const TransformationSection = () => {
           </div>
 
           {/* Mobile Layout */}
-          <div className="flex flex-col items-center gap-4 lg:hidden">
+          <div className="flex flex-col items-center gap-2 lg:hidden">
             {" "}
-            {/* Reduzido o gap */}
+            {/* Reduzido o gap para gap-2 */}
             {/* Lado superior - Código (escalado e centralizado para mobile) */}
             <motion.div
               className="relative w-full flex justify-center" // Adicionado flex justify-center para centralizar
@@ -108,7 +108,7 @@ export const TransformationSection = () => {
               <motion.div
                 className="origin-center" // Alterado para origin-center para centralizar corretamente a escala
                 initial={{ scale: 1 }}
-                animate={{ scale: isMobileView ? 0.7 : 1 }} // Scale 70% on mobile, 100% on desktop
+                animate={{ scale: isMobileView ? 0.5 : 1 }} // Scale 50% on mobile, 100% on desktop
                 transition={{ duration: 0.5 }}
               >
                 <CodeBlock
@@ -119,9 +119,9 @@ export const TransformationSection = () => {
               </motion.div>
             </motion.div>
             {/* Linhas de conexão para Mobile (entre código e app) */}
-            <div className="relative w-full h-20 flex items-center justify-center">
+            <div className="relative w-full h-12 flex items-center justify-center">
               {" "}
-              {/* Reduzido a altura */}
+              {/* Reduzido a altura para h-12 */}
               <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} isMobile={true} />
             </div>
             {/* Lado inferior - App */}

@@ -227,16 +227,16 @@ export const BuildYourSiteSection = () => {
         </div>
 
         {/* Área de construção - Mobile (flex-row para lado a lado) */}
-        <div className="flex flex-col sm:flex-row sm:gap-3 lg:hidden">
+        <div className="flex flex-col sm:flex-row sm:gap-2 lg:hidden">
           {" "}
-          {/* Reduzido o gap para sm */}
+          {/* Reduzido o gap para sm:gap-2 */}
           {/* Paleta de Blocos - Mobile */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: theme.animation.duration.slow, delay: 0.7 }}
             viewport={{ once: true }}
-            className="w-full sm:w-1/4 mb-8 sm:mb-0" // Ocupa 1/4 da largura em sm
+            className="w-full sm:w-2/5 mb-8 sm:mb-0" // Ocupa 2/5 (40%) da largura em sm
           >
             <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
               Blocos Disponíveis
@@ -249,7 +249,7 @@ export const BuildYourSiteSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: theme.animation.duration.slow, delay: 0.9 }}
             viewport={{ once: true }}
-            className="w-full sm:w-3/4 flex flex-col items-center relative" // Ocupa 3/4 da largura em sm
+            className="w-full sm:w-3/5 flex flex-col items-center relative" // Ocupa 3/5 (60%) da largura em sm
           >
             <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
               Seu Layout
