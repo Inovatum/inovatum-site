@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react" // Import useEffect
+import { useRef, useState, useEffect } from "react"
 import { Sparkles } from "lucide-react"
 import { theme } from "@/lib/theme"
 import { CodeBlock } from "@/components/transformation/code-block"
@@ -13,22 +13,20 @@ export const TransformationSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-200px" })
   const [currentExample, setCurrentExample] = useState(0)
   const [animationKey, setAnimationKey] = useState(0)
-  const [isMobileView, setIsMobileView] = useState(false) // New state for mobile view
+  const [isMobileView, setIsMobileView] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth < 1024) // Adjust breakpoint as needed (lg is 1024px)
+      setIsMobileView(window.innerWidth < 1024)
     }
 
-    // Set initial value
     handleResize()
-
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   const handleCodeChange = () => {
-    setAnimationKey((prev) => prev + 1) // Força recriação das animações
+    setAnimationKey((prev) => prev + 1)
   }
 
   return (
@@ -95,18 +93,18 @@ export const TransformationSection = () => {
           </div>
 
           {/* Mobile Layout */}
-          <div className="flex flex-col items-center gap-2 lg:hidden">
+          <div className="flex flex-col items-center gap-0 lg:hidden">
             {" "}
-            {/* Reduzido o gap para gap-2 */}
+            {/* Reduzido o gap para gap-0 */}
             {/* Lado superior - Código (escalado e centralizado para mobile) */}
             <motion.div
-              className="relative w-full flex justify-center" // Adicionado flex justify-center para centralizar
+              className="relative w-full flex justify-center"
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: theme.animation.duration.slow }}
             >
               <motion.div
-                className="origin-center" // Alterado para origin-center para centralizar corretamente a escala
+                className="origin-center"
                 initial={{ scale: 1 }}
                 animate={{ scale: isMobileView ? 0.5 : 1 }} // Scale 50% on mobile, 100% on desktop
                 transition={{ duration: 0.5 }}
@@ -119,9 +117,9 @@ export const TransformationSection = () => {
               </motion.div>
             </motion.div>
             {/* Linhas de conexão para Mobile (entre código e app) */}
-            <div className="relative w-full h-12 flex items-center justify-center">
+            <div className="relative w-full h-8 flex items-center justify-center">
               {" "}
-              {/* Reduzido a altura para h-12 */}
+              {/* Mantido h-8, mas o gap-0 vai aproximar mais */}
               <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} isMobile={true} />
             </div>
             {/* Lado inferior - App */}
