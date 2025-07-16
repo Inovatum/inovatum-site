@@ -95,16 +95,18 @@ export const TransformationSection = () => {
           </div>
 
           {/* Mobile Layout */}
-          <div className="flex flex-col items-center gap-8 lg:hidden">
-            {/* Lado superior - Código (escalado para mobile) */}
+          <div className="flex flex-col items-center gap-4 lg:hidden">
+            {" "}
+            {/* Reduzido o gap */}
+            {/* Lado superior - Código (escalado e centralizado para mobile) */}
             <motion.div
-              className="relative w-full"
+              className="relative w-full flex justify-center" // Adicionado flex justify-center para centralizar
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: theme.animation.duration.slow }}
             >
               <motion.div
-                className="origin-top-left"
+                className="origin-center" // Alterado para origin-center para centralizar corretamente a escala
                 initial={{ scale: 1 }}
                 animate={{ scale: isMobileView ? 0.7 : 1 }} // Scale 70% on mobile, 100% on desktop
                 transition={{ duration: 0.5 }}
@@ -116,12 +118,12 @@ export const TransformationSection = () => {
                 />
               </motion.div>
             </motion.div>
-
             {/* Linhas de conexão para Mobile (entre código e app) */}
-            <div className="relative w-full h-32 flex items-center justify-center">
+            <div className="relative w-full h-20 flex items-center justify-center">
+              {" "}
+              {/* Reduzido a altura */}
               <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} isMobile={true} />
             </div>
-
             {/* Lado inferior - App */}
             <div className="relative flex justify-center w-full">
               <AppScreen isActive={isInView} currentApp={currentExample} />

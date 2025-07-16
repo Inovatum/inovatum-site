@@ -227,28 +227,29 @@ export const BuildYourSiteSection = () => {
         </div>
 
         {/* Área de construção - Mobile (flex-row para lado a lado) */}
-        <div className="flex flex-col sm:flex-row sm:gap-4 lg:hidden">
+        <div className="flex flex-col sm:flex-row sm:gap-3 lg:hidden">
+          {" "}
+          {/* Reduzido o gap para sm */}
           {/* Paleta de Blocos - Mobile */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: theme.animation.duration.slow, delay: 0.7 }}
             viewport={{ once: true }}
-            className="w-full sm:w-1/3 mb-8 sm:mb-0" // Ocupa 1/3 da largura em sm, 100% em telas menores
+            className="w-full sm:w-1/4 mb-8 sm:mb-0" // Ocupa 1/4 da largura em sm
           >
             <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
               Blocos Disponíveis
             </h3>
             <SiteBlockPalette onClickBlock={handleClickBlock} />
           </motion.div>
-
           {/* Canvas de Visualização - Mobile */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: theme.animation.duration.slow, delay: 0.9 }}
             viewport={{ once: true }}
-            className="w-full sm:w-2/3 flex flex-col items-center relative" // Ocupa 2/3 da largura em sm
+            className="w-full sm:w-3/4 flex flex-col items-center relative" // Ocupa 3/4 da largura em sm
           >
             <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
               Seu Layout
