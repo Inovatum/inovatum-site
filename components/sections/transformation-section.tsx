@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react" // Import useEffect
 import { Sparkles } from "lucide-react"
 import { theme } from "@/lib/theme"
 import { CodeBlock } from "@/components/transformation/code-block"
@@ -13,6 +13,19 @@ export const TransformationSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-200px" })
   const [currentExample, setCurrentExample] = useState(0)
   const [animationKey, setAnimationKey] = useState(0)
+  const [isMobileView, setIsMobileView] = useState(false) // New state for mobile view
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 1024) // Adjust breakpoint as needed (lg is 1024px)
+    }
+
+    // Set initial value
+    handleResize()
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   const handleCodeChange = () => {
     setAnimationKey((prev) => prev + 1) // Força recriação das animações
@@ -57,9 +70,10 @@ export const TransformationSection = () => {
           </p>
         </motion.div>
 
-        {/* Conteúdo principal */}
+        {/* Conteúdo principal - Layout condicional para mobile/desktop */}
         <div className="relative max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Desktop Layout */}
+          <div className="hidden lg:grid lg:grid-cols-2 gap-16 items-center">
             {/* Lado esquerdo - Código */}
             <div className="relative">
               <CodeBlock
@@ -73,11 +87,45 @@ export const TransformationSection = () => {
             <div className="relative flex justify-center">
               <AppScreen isActive={isInView} currentApp={currentExample} />
             </div>
+
+            {/* Linhas de conexão para desktop */}
+            <div className="absolute inset-0">
+              <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} isMobile={false} />
+            </div>
           </div>
 
-          {/* Linhas de conexão melhoradas */}
-          <div className="hidden lg:block">
-            <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} />
+          {/* Mobile Layout */}
+          <div className="flex flex-col items-center gap-8 lg:hidden">
+            {/* Lado superior - Código (escalado para mobile) */}
+            <motion.div
+              className="relative w-full"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: theme.animation.duration.slow }}
+            >
+              <motion.div
+                className="origin-top-left"
+                initial={{ scale: 1 }}
+                animate={{ scale: isMobileView ? 0.7 : 1 }} // Scale 70% on mobile, 100% on desktop
+                transition={{ duration: 0.5 }}
+              >
+                <CodeBlock
+                  currentExample={currentExample}
+                  setCurrentExample={setCurrentExample}
+                  onCodeChange={handleCodeChange}
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Linhas de conexão para Mobile (entre código e app) */}
+            <div className="relative w-full h-32 flex items-center justify-center">
+              <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} isMobile={true} />
+            </div>
+
+            {/* Lado inferior - App */}
+            <div className="relative flex justify-center w-full">
+              <AppScreen isActive={isInView} currentApp={currentExample} />
+            </div>
           </div>
         </div>
 

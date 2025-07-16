@@ -95,7 +95,7 @@ export const BuildYourSiteSection = () => {
           </p>
           <Button
             onClick={() => setIsCanvasClosed(false)}
-            className={`bg-gradient-to-r ${theme.colors.gradients.primary} text-white px-6 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+            className={`bg-gradient-to-r ${theme.colors.gradients.primary.from} ${theme.colors.gradients.primary.to} text-white px-6 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
           >
             Reabrir Navegador
           </Button>
@@ -137,7 +137,10 @@ export const BuildYourSiteSection = () => {
             Sua Visão, Seu Site
           </motion.div>
           <h2
-            className={`text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r ${theme.colors.gradients.dark} bg-clip-text text-transparent`}
+            className={`text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent`}
+            style={{
+              backgroundImage: `linear-gradient(to right, ${theme.colors.gradients.dark.from}, ${theme.colors.gradients.dark.to})`,
+            }}
           >
             Monte Seu Site do Zero
           </h2>
@@ -155,16 +158,21 @@ export const BuildYourSiteSection = () => {
           transition={{ duration: theme.animation.duration.slow, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <span className={`bg-gradient-to-r ${theme.colors.gradients.primary} bg-clip-text text-transparent`}>
+          <span
+            className={`bg-clip-text text-transparent`}
+            style={{
+              backgroundImage: `linear-gradient(to right, ${theme.colors.gradients.primary.from}, ${theme.colors.gradients.primary.to})`,
+            }}
+          >
             Você é o dono do seu site,
           </span>
           <br />
           você faz como bem entender!
         </motion.p>
 
-        {/* Área de construção */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Paleta de Blocos */}
+        {/* Área de construção - Desktop */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-8">
+          {/* Paleta de Blocos - Desktop */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -178,7 +186,7 @@ export const BuildYourSiteSection = () => {
             <SiteBlockPalette onClickBlock={handleClickBlock} />
           </motion.div>
 
-          {/* Canvas de Visualização */}
+          {/* Canvas de Visualização - Desktop */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -189,7 +197,6 @@ export const BuildYourSiteSection = () => {
             <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
               Seu Layout
             </h3>
-            {/* Mascot positioned relative to this container */}
             <Mascot key={mascotKey} message={mascotMessage} onMessageDisplayed={handleMascotMessageDisplayed} />
             <SitePreviewCanvas
               blocks={canvasBlocks}
@@ -210,7 +217,63 @@ export const BuildYourSiteSection = () => {
             >
               <Button
                 onClick={handleResetCanvas}
-                className={`bg-gradient-to-r ${theme.colors.gradients.dark} text-white px-6 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+                className={`bg-gradient-to-r ${theme.colors.gradients.dark.from} ${theme.colors.gradients.dark.to} text-white px-6 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+              >
+                <RotateCcw className="w-5 h-5 mr-2" />
+                Reiniciar Layout
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Área de construção - Mobile (flex-row para lado a lado) */}
+        <div className="flex flex-col sm:flex-row sm:gap-4 lg:hidden">
+          {/* Paleta de Blocos - Mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: theme.animation.duration.slow, delay: 0.7 }}
+            viewport={{ once: true }}
+            className="w-full sm:w-1/3 mb-8 sm:mb-0" // Ocupa 1/3 da largura em sm, 100% em telas menores
+          >
+            <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
+              Blocos Disponíveis
+            </h3>
+            <SiteBlockPalette onClickBlock={handleClickBlock} />
+          </motion.div>
+
+          {/* Canvas de Visualização - Mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: theme.animation.duration.slow, delay: 0.9 }}
+            viewport={{ once: true }}
+            className="w-full sm:w-2/3 flex flex-col items-center relative" // Ocupa 2/3 da largura em sm
+          >
+            <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: theme.colors.primary.title }}>
+              Seu Layout
+            </h3>
+            <Mascot key={mascotKey} message={mascotMessage} onMessageDisplayed={handleMascotMessageDisplayed} />
+            <SitePreviewCanvas
+              blocks={canvasBlocks}
+              onReorder={handleReorderCanvasBlocks}
+              canvasRef={canvasRef}
+              onCanvasClose={handleCanvasClose}
+              onCanvasMinimize={handleCanvasMinimize}
+              onCanvasMaximize={handleCanvasMaximize}
+              isMinimized={isCanvasMinimized}
+              isMaximized={isCanvasMaximized}
+              onRemoveBlock={handleRemoveBlock}
+            />
+            <motion.div
+              className="mt-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: theme.animation.duration.normal, delay: 1.2 }}
+            >
+              <Button
+                onClick={handleResetCanvas}
+                className={`bg-gradient-to-r ${theme.colors.gradients.dark.from} ${theme.colors.gradients.dark.to} text-white px-6 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
               >
                 <RotateCcw className="w-5 h-5 mr-2" />
                 Reiniciar Layout
