@@ -156,18 +156,6 @@ export const SitePreviewCanvas = ({
         <div className="flex space-x-2">
           {/* Red, Yellow, Green dots restored, but only green is functional */}
           <motion.div
-            className="w-3 h-3 bg-red-500 rounded-full cursor-pointer"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            // onClick={onCanvasClose} // Removed functionality
-          />
-          <motion.div
-            className="w-3 h-3 bg-yellow-500 rounded-full cursor-pointer"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            // onClick={onCanvasMinimize} // Removed functionality
-          />
-          <motion.div
             className="w-3 h-3 bg-green-500 rounded-full cursor-pointer"
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}

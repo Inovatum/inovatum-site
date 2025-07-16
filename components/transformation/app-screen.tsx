@@ -67,7 +67,7 @@ export const AppScreen = ({ isActive, currentApp }: AppScreenProps) => {
 
   return (
     <motion.div
-      className="relative w-[180px] mx-auto lg:w-64 lg:h-96 lg:mx-0" // Fixed width for mobile, fixed for desktop
+      className="relative w-[180px] mx-auto lg:w-64 lg:h-96 lg:mx-0" // Revertido para w-[180px] para mobile
       initial={{ opacity: 0, x: 50 }}
       animate={isActive ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: theme.animation.duration.slow, delay: 0.3 }}
@@ -385,7 +385,7 @@ const EcommerceApp = () => {
                 </span>
                 <div className="flex">
                   {[...Array(product.rating)].map((_, i) => (
-                    <Star key={i} size={5} fill="#F59E0B" color="#F59E0B" /> // Adjusted icon size
+                    <Star key={i} size={5} fill="#F59E0B" color="#F59E0B" />
                   ))}
                 </div>
               </div>
