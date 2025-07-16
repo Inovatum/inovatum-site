@@ -93,37 +93,32 @@ export const TransformationSection = () => {
           </div>
 
           {/* Mobile Layout */}
-          <div className="flex flex-col items-center gap-4 lg:hidden">
+          <div className="flex flex-col items-center gap-0 lg:hidden">
             {" "}
-            {/* Aumentado o gap para 4 para espaçamento */}
+            {/* Removido o gap para controle manual do espaçamento */}
             {/* Lado superior - Código (centralizado para mobile) */}
             <motion.div
-              className="relative w-full flex justify-center"
+              className="relative w-full flex justify-center mb-[-2rem]" // Adicionado margin-bottom negativo para aproximar da linha
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: theme.animation.duration.slow }}
             >
-              <motion.div
-                className="origin-center"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1 }} // Removido o scale para 0.5, mantendo o tamanho original
-                transition={{ duration: 0.5 }}
-              >
-                <CodeBlock
-                  currentExample={currentExample}
-                  setCurrentExample={setCurrentExample}
-                  onCodeChange={handleCodeChange}
-                />
-              </motion.div>
+              <CodeBlock
+                currentExample={currentExample}
+                setCurrentExample={setCurrentExample}
+                onCodeChange={handleCodeChange}
+              />
             </motion.div>
             {/* Linhas de conexão para Mobile (entre código e app) */}
-            <div className="relative w-full h-20 flex items-center justify-center overflow-hidden">
+            <div className="relative w-full h-24 flex items-center justify-center overflow-hidden">
               {" "}
-              {/* Aumentado a altura para h-20 */}
+              {/* Aumentado a altura para h-24 para a linha */}
               <ConnectionLines key={animationKey} isActive={isInView} currentApp={currentExample} isMobile={true} />
             </div>
             {/* Lado inferior - App */}
-            <div className="relative flex justify-center w-full">
+            <div className="relative flex justify-center w-full mt-[-2rem]">
+              {" "}
+              {/* Adicionado margin-top negativo para aproximar da linha */}
               <AppScreen isActive={isInView} currentApp={currentExample} />
             </div>
           </div>

@@ -155,35 +155,49 @@ export const CodeBlock = ({ currentExample, setCurrentExample, onCodeChange }: C
   return (
     <motion.div
       ref={ref}
-      className="relative"
+      className="relative w-full max-w-xs mx-auto lg:max-w-none" // Definido max-w-xs (320px) para mobile
       initial={{ opacity: 0, x: -50 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: theme.animation.duration.slow }}
     >
       <div
-        className="rounded-2xl p-6 shadow-2xl border-2"
+        className="rounded-2xl p-4 sm:p-6 shadow-2xl border-2" // Adjusted padding for smaller screens
         style={{
           backgroundColor: theme.colors.transformation.codeBg,
           borderColor: theme.colors.transformation.outline,
         }}
       >
         {/* Header do editor */}
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-600">
-          <div className="flex items-center space-x-4">
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+        <div className="flex items-center justify-between mb-4 sm:mb-6 pb-2 sm:pb-4 border-b border-gray-600">
+          {" "}
+          {/* Adjusted padding */}
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {" "}
+            {/* Adjusted spacing */}
+            <div className="flex space-x-1 sm:space-x-2">
+              {" "}
+              {/* Adjusted spacing */}
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div> {/* Adjusted size */}
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div> {/* Adjusted size */}
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div> {/* Adjusted size */}
             </div>
-            <span className="text-sm font-medium" style={{ color: theme.colors.transformation.codeText }}>
+            <span className="text-xs sm:text-sm font-medium" style={{ color: theme.colors.transformation.codeText }}>
               {currentCode.filename}
             </span>
           </div>
-
           {/* Language indicator */}
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: getLanguageColor(currentCode.language) }} />
-            <span className="text-xs font-medium" style={{ color: theme.colors.transformation.codeComment }}>
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            {" "}
+            {/* Adjusted spacing */}
+            <div
+              className="w-2 h-2 sm:w-3 sm:h-3 rounded-full"
+              style={{ backgroundColor: getLanguageColor(currentCode.language) }}
+            />{" "}
+            {/* Adjusted size */}
+            <span
+              className="text-[0.65rem] sm:text-xs font-medium"
+              style={{ color: theme.colors.transformation.codeComment }}
+            >
               {currentCode.language}
             </span>
           </div>
@@ -192,7 +206,7 @@ export const CodeBlock = ({ currentExample, setCurrentExample, onCodeChange }: C
         {/* Código com animação de transição mais rápida */}
         <motion.div
           key={currentExample}
-          className="font-mono text-sm leading-relaxed"
+          className="font-mono text-xs sm:text-sm leading-relaxed" // Adjusted font size
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }} // Reduzido de 0.5 para 0.3
@@ -221,11 +235,13 @@ export const CodeBlock = ({ currentExample, setCurrentExample, onCodeChange }: C
         </motion.div>
 
         {/* Progress indicator - agora clicável e sincronizado */}
-        <div className="flex justify-center mt-6 space-x-2">
+        <div className="flex justify-center mt-4 sm:mt-6 space-x-1.5 sm:space-x-2">
+          {" "}
+          {/* Adjusted spacing */}
           {codeExamples.map((_, index) => (
             <motion.div
               key={index}
-              className="w-2 h-2 rounded-full cursor-pointer"
+              className="w-1.5 h-1.5 sm:w-2 h-2 rounded-full cursor-pointer" // Adjusted size
               style={{
                 backgroundColor:
                   index === currentExample
@@ -243,7 +259,7 @@ export const CodeBlock = ({ currentExample, setCurrentExample, onCodeChange }: C
       {/* Description badge */}
       <motion.div
         key={currentExample}
-        className="absolute -top-3 right-4 px-3 py-1 rounded-full text-xs font-medium"
+        className="absolute -top-2 sm:-top-3 right-2 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-medium" // Adjusted padding and font size
         style={{
           backgroundColor: theme.colors.transformation.accent,
           color: "white",
